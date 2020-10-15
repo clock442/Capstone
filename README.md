@@ -21,7 +21,7 @@ There will be 5 models for this project.
 
 Podcast, Episode, Genre, Comment, and User
 
-Podcast(Model):
+Podcast(Model): /n
     title =
     genre = many to many field (Genre)
     image =
