@@ -21,15 +21,15 @@ There will be 5 models for this project.
 
 Podcast, Episode, Genre, Comment, and User
 
-Podcast(Model): /n
-    title =
-    genre = many to many field (Genre)
-    image =
-    thumbnail = 
-    audio_length_sec =
-    publisher =
+#### Podcast(Model):
+    title = <br/>
+    genre = many to many field (Genre) <br/>
+    image = <br/>
+    thumbnail = <br/>
+    audio_length_sec = <br/>
+    publisher =<br/>
 
-Episode(Model):
+#### Episode(Model):
     title =
     image = 
     link =
@@ -39,15 +39,15 @@ Episode(Model):
     description =
     podcast = foreign key (Podcast)
 
-Genre(Model):
+#### Genre(Model):
     genre = 
 
-Comment(Model):
+#### Comment(Model):
     text =
     date_created =
     user = foreign key (User)
 
-User(Model):
+#### User(Model):
     favorite = foreign key (Episode)
 
 ## Schedule
