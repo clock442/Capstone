@@ -22,12 +22,12 @@ There will be 5 models for this project.
 Podcast, Episode, Genre, Comment, and User
 
 #### Podcast(Model):
-    title = <br/>
-    genre = many to many field (Genre) <br/>
-    image = <br/>
-    thumbnail = <br/>
-    audio_length_sec = <br/>
-    publisher =<br/>
+    title = 
+    genre = many to many field (Genre) 
+    image = 
+    thumbnail = 
+    audio_length_sec = 
+    publisher =
 
 #### Episode(Model):
     title =
