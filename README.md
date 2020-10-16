@@ -69,3 +69,6 @@ Podcast, Episode, Genre, Comment, and User
 - (Maybe) Top ten by genre page
 - (Maybe) Upvotes
 
+
+[API link](https://www.listennotes.com/api/) 
+
