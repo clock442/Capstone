@@ -4,7 +4,8 @@ Capstone final project
 ## Project Overview
 This will be a podcast search website. It will allow you to search for podcasts by episode, name, or genre. There will
 also be a random podcast button and a best by genre area. Users will be able to favorite podcasts and episodes and 
-will be able to comment on them.
+will be able to comment on them. I will be using Vue and Materialize with Django to create the project.
+This is the api that I will be using to build the app [API link](https://www.listennotes.com/api/). 
 
 ## Functionality
 When a user goes to the home page they will see a banner and a brief explanation of the site. There will be a top 
@@ -46,9 +47,10 @@ Podcast, Episode, Genre, Comment, and User
     text =
     date_created =
     user = foreign key (User)
+    episode = foreign key (Episode)
 
 #### User(Model):
-    favorite = foreign key (Episode)
+    favorite = many to many (Episode)
 
 ## Schedule
 
@@ -70,5 +72,5 @@ Podcast, Episode, Genre, Comment, and User
 - (Maybe) Upvotes
 
 
-[API link](https://www.listennotes.com/api/) 
+
 
