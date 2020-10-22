@@ -29,7 +29,7 @@ where you will be able to comment and see info for that specific route.
     climb_type = foreign key (ClimbType)
     rating
     height
-    holds = foreign key (Hold)
+    holds = many to many (Hold)
     wall_type = foreign key (Wall)
     description
     beta

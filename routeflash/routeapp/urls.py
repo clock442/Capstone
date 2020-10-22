@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
 
-app_name = 'rockapp'
+app_name = 'routeflash'
 
-url_patterns = [
+urlpatterns = [
     path('', views.index, name='index'),
 ]
