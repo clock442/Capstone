@@ -26,28 +26,23 @@ where you will be able to comment and see info for that specific route.
 
 #### Route(Model):
     gym = foreign key (Gym)
-    climb_type = foreign key (ClimbType)
     rating
     height
     holds = many to many (Hold)
-    wall_type = foreign key (Wall)
+    wall_type = one to one (Wall)
     description
-    beta
-    user_beta = foreign key (User)
     comment = many to many (Comment)
     date_created 
     date_leaving
+    x_position
+    y_position
 
 #### Hold(Model):
     hold 
 
 #### Wall(Model):
     wall
-
-#### ClimbType(Model):
-    type
     
-
 #### Comment(Model):
     text =
     date_created =
