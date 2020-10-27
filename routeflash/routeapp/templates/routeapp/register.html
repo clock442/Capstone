@@ -1,0 +1,17 @@
+{% extends 'routeapp/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    {% if message %}
+    <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'routeapp:register' %}" method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="g-recaptcha" data-sitekey="6LfucdQZAAAAAA0DCMJCxQgSoc9raWLx_dQlmdFd"></div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+</div>
+{% endblock %}
