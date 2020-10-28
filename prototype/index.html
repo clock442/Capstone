@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.panzoom/4.0.0/panzoom.min.js" integrity="sha512-9P4403el58YclVUmhMst5Bzpcy+i0V0F0wiMlrkTDgmVqYXhF+tccpnhGIHKzKPXKaTF0Q4J9UEhu2i6PckJWg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.panzoom/4.0.0/panzoom.min.js"
+        integrity="sha512-9P4403el58YclVUmhMst5Bzpcy+i0V0F0wiMlrkTDgmVqYXhF+tccpnhGIHKzKPXKaTF0Q4J9UEhu2i6PckJWg=="
+        crossorigin="anonymous"></script>
     <style>
         #panzoom {
             border: 1px solid black;
@@ -13,23 +16,26 @@
             background-position: center;
             background-size: contain;
             background-repeat: no-repeat;
-            width:1200px;
-            height:800px;
+            width: 1200px;
+            height: 800px;
             position: relative;
 
         }
+
         #panzoom_container {
             border: 1px solid black;
-            width:1200px;
-            height:800px;
-            background-color:black;
+            width: 1200px;
+            height: 800px;
+            background-color: black;
         }
+
         #panzoom button {
             position: absolute;
 
         }
     </style>
 </head>
+
 <body>
     <div id="app">
         <div id="panzoom_container">
@@ -41,7 +47,7 @@
         </div>
     </div>
     <script>
-        
+
         let app = new Vue({
             el: '#app',
             data: {
@@ -49,7 +55,7 @@
                     text: 'NonAuto',
                     x: 500,
                     y: 400
-                },{
+                }, {
                     text: 'Auto',
                     x: 1300,
                     y: 300
@@ -57,12 +63,20 @@
             },
             methods: {
             },
-            created: function() {
-                setTimeout(function() {
+            created: function () {
+                setTimeout(function () {
                     const panzoom = Panzoom(document.querySelector('#panzoom'))
                 }, 300)
             }
         })
+        const elem = document.getElementById('panzoom_container')
+        const panzoom = Panzoom(elem, {
+            maxScale: 5
+        })
+        panzoom.pan(10, 10)
+        panzoom.zoom(2, { animate: true })
+        elem.parentElement.addEventListener('wheel', panzoom.zoomWithWheel)
     </script>
 </body>
+
 </html>
