@@ -2,9 +2,38 @@
 
 {% block content %}
 <div id="app" class="container">
-    Gyms go here
+    <h3>Supported Gyms</h3>
+
+    <div v-for="gym in gyms">
+        <div class="card">
+            <h5 class="card-header">[[gym.name]]</h5>
+            <div class="card-body">
+              <p class="card-text">[[gym.address]]</p>
+              <a href="#" class="btn btn-primary">See Routes</a>
+            </div>
+          </div>
+    </div>
 </div>
 <script>
-
+    let app = new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data: {
+            gyms: []
+        },
+        methods: {
+            getGyms: function(){
+                axios({
+                    url: '{% url "routeapp:getgyms" %}',
+                    method: 'get',
+                }).then(response => {
+                    this.gyms = response.data.gyms
+                })
+            }
+        },
+        created: function() {
+            this.getGyms()
+        }
+    })
 </script>
 {% endblock %}

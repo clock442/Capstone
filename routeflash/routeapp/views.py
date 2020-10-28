@@ -1,11 +1,12 @@
 from django.shortcuts import render, reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .forms import UserForm, LoginForm
 import requests
 from django.contrib.auth.decorators import login_required
 import django.contrib.auth
 from routeflash import secrets
 from django.contrib.auth.models import User
+from .models import Gym, Route, WallType, HoldType
 
 def index(request):
     return render(request, 'routeapp/index.html')
@@ -67,3 +68,15 @@ def logout(request):
 
 def gyms(request):
     return render(request, 'routeapp/gyms.html')
+
+def getgyms(request):
+    gym_list = Gym.objects.order_by('name')
+    data = []
+    for gym in gym_list:
+        data.append({
+            'id': gym.id,
+            'name': gym.name,
+            'address': gym.address
+        })
+
+    return JsonResponse({'gyms': data})
