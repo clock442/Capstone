@@ -11,7 +11,7 @@
         crossorigin="anonymous"></script>
     <style>
         #panzoom {
-            border: 1px solid black;
+            border: 1px solid blue;
             background-image: url('https://images.squarespace-cdn.com/content/v1/58bda1d6d482e9728ba1f5b7/1603132117410-E7O4X4VKUC8IJT4ENY14/ke17ZwdGBToddI8pDm48kA5MC_ZF8Hs_QB15lcL-Mf97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UTJl5Fk-tTvhNc4BpztFYVO1Vy5TrwNSVcrLo4puG69lOpYghpI-Ha_TwZsqqmJXng/NE-Map-web.png?format=1500w');
             background-position: center;
             background-size: contain;
@@ -23,7 +23,7 @@
         }
 
         #panzoom_container {
-            border: 1px solid black;
+            border: 1px solid red;
             width: 1200px;
             height: 800px;
             background-color: black;
@@ -62,20 +62,22 @@
                 }]
             },
             methods: {
+                scroll: function () {
+                    alert('hello')
+                    panzoom.zoomWithWheel
+
+                }
             },
             created: function () {
                 setTimeout(function () {
+                    let elem = document.querySelector('#panzoom')
                     const panzoom = Panzoom(document.querySelector('#panzoom'))
+                    panzoom.pan(10, 10)
+                    panzoom.zoom(2, { animate: true })
+                    elem.parentElement.addEventListener('wheel', panzoom.zoomWithWheel)
                 }, 300)
             }
         })
-        const elem = document.getElementById('panzoom_container')
-        const panzoom = Panzoom(elem, {
-            maxScale: 5
-        })
-        panzoom.pan(10, 10)
-        panzoom.zoom(2, { animate: true })
-        elem.parentElement.addEventListener('wheel', panzoom.zoomWithWheel)
     </script>
 </body>
 

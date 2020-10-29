@@ -7,6 +7,7 @@ import django.contrib.auth
 from routeflash import secrets
 from django.contrib.auth.models import User
 from .models import Gym, Route, WallType, HoldType
+from datetime import datetime
 
 def index(request):
     return render(request, 'routeapp/index.html')
@@ -80,3 +81,27 @@ def getgyms(request):
         })
 
     return JsonResponse({'gyms': data})
+
+def routes(request, gym_id):
+    gym = Gym.objects.get(id=int(gym_id))
+    route_list = gym.routes.all()
+    data = []
+    for route in route_list:
+        data.append({
+            'id': route.id,
+            'name': route.name,
+            'wall_type': route.wall_type.name,
+            'hold_types': [hold_type.name for hold_type in route.hold_types.all()],
+            'rating': route.rating,
+            'height': route.height,
+            'description': route.description,
+            'date_created': route.date_created.strftime("%m/%d/%Y"),
+            'x_position': route.x_position,
+            'y_position': route.y_position,
+        })
+
+    context = {
+        'gym': gym,
+        'routes': data,
+    }
+    return render(request, 'routeapp/routes.html', context)

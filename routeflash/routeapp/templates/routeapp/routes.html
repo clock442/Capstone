@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"
@@ -26,6 +25,28 @@
 
         #hint_id_username {
             display: none;
+        }
+        #panzoom {
+            border: 1px solid blue;
+            background-image: url('https://images.squarespace-cdn.com/content/v1/58bda1d6d482e9728ba1f5b7/1603132117410-E7O4X4VKUC8IJT4ENY14/ke17ZwdGBToddI8pDm48kA5MC_ZF8Hs_QB15lcL-Mf97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UTJl5Fk-tTvhNc4BpztFYVO1Vy5TrwNSVcrLo4puG69lOpYghpI-Ha_TwZsqqmJXng/NE-Map-web.png?format=1500w');
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: auto;
+            height: 800px;
+            position: relative;
+
+        }
+
+        #panzoom_container {
+            border: 1px solid red;
+            width: 0 auto;
+            background-color: black;
+        }
+
+        #panzoom button {
+            position: absolute;
+
         }
     </style>
 </head>
@@ -65,10 +86,62 @@
                 </ul>
             </div>
         </nav>
+
+        <span><h2>Routes</h2></span>
+        
+        <div id="app">
+            <div id="panzoom_container">
+                <div id="panzoom">
+                    <button v-for="route in routes" :style="{left: route.x + 'px', top: route.y + 'px'}">
+                        [[route.text]]
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-    {% block content %}
-    {% endblock %}
+
+    <script>
     
+        let app = new Vue({
+            el: '#app',
+            delimiters: ['[[', ']]'],
+            data: {
+                routes: [{
+                    text: 'NonAuto',
+                    x: 500,
+                    y: 400
+                }, {
+                    text: 'Auto',
+                    x: 1300,
+                    y: 300
+                }]
+            },
+            methods: {
+                scroll: function () {
+                    alert('hello')
+                    panzoom.zoomWithWheel
+    
+                }
+            },
+            created: function () {
+                setTimeout(function () {
+                    let elem = document.querySelector('#panzoom')
+                    const panzoom = Panzoom(document.querySelector('#panzoom'))
+                    panzoom.pan(10, 10)
+                    panzoom.zoom(2, { animate: true })
+                    elem.parentElement.addEventListener('wheel', panzoom.zoomWithWheel)
+                }, 300)
+            }
+        })
+    </script>
+    
+
+
+
+
+
+
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

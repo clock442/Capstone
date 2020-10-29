@@ -10,4 +10,5 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('gyms/', views.gyms, name='gyms'),
     path('getgyms/', views.getgyms, name='getgyms'),
+    path('routes/<str:gym_id>/', views.routes, name='routes'),
 ]
