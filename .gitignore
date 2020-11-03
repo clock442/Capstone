@@ -130,3 +130,5 @@ dmypy.json
 
 # Django Secret Keys
 secrets.py
+
+development_settings.py
