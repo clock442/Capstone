@@ -84,6 +84,30 @@ def getgyms(request):
 
 def routes(request, gym_id):
     gym = Gym.objects.get(id=int(gym_id))
+
+    context = {
+        'gym': gym,
+    }
+    return render(request, 'routeapp/routes.html', context)
+
+def getroutes(request, gym_id):
+
+    route_color_dict = {
+        '1': '#388e3c',
+        '2': '#4caf50',
+        '3': '#c6ff00',
+        '4': '#ffeb3b',
+        '5': '#ffb74d',
+        '6': '#f57c00',
+        '7': '#d32f2f',
+        '8': '#ef5350',
+        '9': '#f06292',
+        '10': '#ab47bc',
+        '11': '#64b5f6'
+    }
+
+
+    gym = Gym.objects.get(id=gym_id)
     route_list = gym.routes.all()
     data = []
     for route in route_list:
@@ -98,10 +122,11 @@ def routes(request, gym_id):
             'date_created': route.date_created.strftime("%m/%d/%Y"),
             'x_position': route.x_position,
             'y_position': route.y_position,
+            'rating_color': route_color_dict[str(route.rating)]
         })
 
-    context = {
-        'gym': gym,
-        'routes': data,
-    }
-    return render(request, 'routeapp/routes.html', context)
+    return JsonResponse({'routes': data})
+
+# def routeinfo(request, route_id):
+#     route = Route.objects.get(id=int(route_id))
+

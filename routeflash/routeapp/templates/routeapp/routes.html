@@ -26,13 +26,14 @@
         #hint_id_username {
             display: none;
         }
+
         #panzoom {
             border: 1px solid blue;
-            background-image: url('https://images.squarespace-cdn.com/content/v1/58bda1d6d482e9728ba1f5b7/1603132117410-E7O4X4VKUC8IJT4ENY14/ke17ZwdGBToddI8pDm48kA5MC_ZF8Hs_QB15lcL-Mf97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UTJl5Fk-tTvhNc4BpztFYVO1Vy5TrwNSVcrLo4puG69lOpYghpI-Ha_TwZsqqmJXng/NE-Map-web.png?format=1500w');
+            background-image: url('{{gym.map_image.url}}');
             background-position: center;
             background-size: contain;
             background-repeat: no-repeat;
-            width: auto;
+            width: 1000px;
             height: 800px;
             position: relative;
 
@@ -46,6 +47,9 @@
 
         #panzoom button {
             position: absolute;
+            border-radius: 8px;
+            color: black;
+
 
         }
     </style>
@@ -73,8 +77,8 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'routeapp:register' %}">Register</a>
-                    
-                    {% if user.is_authenticated %}
+
+                        {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'routeapp:logout' %}">Logout</a>
                     </li>
@@ -87,40 +91,78 @@
             </div>
         </nav>
 
-        <span><h2>Routes</h2></span>
-        
+        <span>
+            <h2>Routes</h2>
+        </span>
+
         <div id="app">
             <div id="panzoom_container">
                 <div id="panzoom">
-                    <button v-for="route in routes" :style="{left: route.x + 'px', top: route.y + 'px'}">
-                        [[route.text]]
-                    </button>
+                    <button data-toggle="modal" data-target="#route-modal" @click="selected_route = route" v-for="route in routes"
+                        :style="{left: route.x_position + 'px', top: route.y_position + 'px', backgroundColor: route.rating_color}">v[[route.rating]]</button>
+
+                </div>
+            </div>
+            <div class="modal fade" id="route-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-    
+
         let app = new Vue({
             el: '#app',
             delimiters: ['[[', ']]'],
             data: {
-                routes: [{
-                    text: 'NonAuto',
-                    x: 500,
-                    y: 400
-                }, {
-                    text: 'Auto',
-                    x: 1300,
-                    y: 300
-                }]
+                routes: [],
+                selected_route: {
+                    'id': '', 
+                    'name': '', 
+                    'wall_type': '', 
+                    'hold_types': [], 
+                    'rating': '', 
+                    'height': '', 
+                    'description': '', 
+                    'date_created': '', 
+                    'x_position': '', 
+                    'y_position': '', 
+                    'rating_color': '', 
+                }
             },
             methods: {
                 scroll: function () {
                     alert('hello')
                     panzoom.zoomWithWheel
-    
+
+                },
+                getRoutes: function () {
+                    console.log('start test')
+                    axios({
+                        url: '{% url "routeapp:getroutes"  gym.id %}',
+                        method: 'get',
+
+                    }).then(response => {
+                        this.routes = response.data.routes
+                    })
+                    console.log('end test')
                 }
             },
             created: function () {
@@ -131,10 +173,11 @@
                     panzoom.zoom(2, { animate: true })
                     elem.parentElement.addEventListener('wheel', panzoom.zoomWithWheel)
                 }, 300)
+                this.getRoutes()
             }
         })
     </script>
-    
+
 
 
 
