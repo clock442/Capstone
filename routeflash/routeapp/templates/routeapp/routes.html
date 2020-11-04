@@ -52,6 +52,15 @@
 
 
         }
+
+        .title {
+            text-align: center;
+            margin: 0 auto;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: black;
+            border-width: 1px;
+        }
     </style>
 </head>
 
@@ -92,7 +101,7 @@
         </nav>
 
         <span>
-            <h2>Routes</h2>
+            <h2 class="title">Routes for {{ gym.name }}</h2>
         </span>
 
         <div id="app">
@@ -174,7 +183,7 @@
                     let elem = document.querySelector('#panzoom')
                     const panzoom = Panzoom(document.querySelector('#panzoom'))
                     panzoom.pan(10, 10)
-                    panzoom.zoom(2, { animate: true })
+                    panzoom.zoom(1, { animate: true })
                     elem.parentElement.addEventListener('wheel', panzoom.zoomWithWheel)
                 }, 300)
                 this.getRoutes()

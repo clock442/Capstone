@@ -127,6 +127,3 @@ def getroutes(request, gym_id):
 
     return JsonResponse({'routes': data})
 
-# def routeinfo(request, route_id):
-#     route = Route.objects.get(id=int(route_id))
-
