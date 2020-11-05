@@ -96,6 +96,7 @@ def routes(request, gym_id):
 def getroutes(request, gym_id):
 
     route_color_dict = {
+        '0': '#fafafa',
         '1': '#388e3c',
         '2': '#4caf50',
         '3': '#c6ff00',
