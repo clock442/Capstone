@@ -6,12 +6,48 @@
         max-width: 100%;
         height: auto;
         border-radius: 4px;
-        padding-top: 10px;
-        padding-bottom: 10px;
     }
+
     #car_id {
         height: 500px;
         overflow-y: hidden;
+    }
+
+    .fade_text {
+        color: white;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+    }
+
+    #fade_inner_text {
+        color: white;
+        font-size: 20px;
+    }
+
+    .fade_container {
+        position: relative;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .fade_container:hover .fade_overlay {
+        opacity: 1;
+    }
+
+    .fade_overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: .5s ease;
+        background-color: #80cbc4;
     }
 </style>
 <div class="container">
@@ -36,8 +72,13 @@
         phasellus faucibus scelerisque. In metus vulputate eu scelerisque felis imperdiet proin fermentum. Leo vel orci
         porta non pulvinar neque laoreet suspendisse.
     </p>
-    <img id="front_img"
-        src="https://images.squarespace-cdn.com/content/56d8efa027d4bdab535637f4/1561255930674-2U60HZVV64H5N4ID2KM4/DSCF0528.JPG?format=1500w&content-type=image%2Fjpeg" />
+    <div class="fade_container">
+        <img id="front_img"
+            src="https://images.squarespace-cdn.com/content/56d8efa027d4bdab535637f4/1561255930674-2U60HZVV64H5N4ID2KM4/DSCF0528.JPG?format=1500w&content-type=image%2Fjpeg" />
+        <div class="fade_overlay">
+            <div class="fade_text"><a class="nav-link" id="fade_inner_text" href="{% url 'routeapp:gyms' %}">Gyms</a></div>
+        </div>
+    </div>
     <div id="car_id" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#car_id" data-slide-to="0" class="active"></li>
