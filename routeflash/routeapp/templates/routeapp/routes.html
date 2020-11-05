@@ -63,81 +63,104 @@
             border-bottom: black;
             border-width: 1px;
         }
+        .my-footer {
+            background-color: #80cbc4;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 2.5rem;
+            padding-bottom: 0;
+        }
+        #page-container {
+            position: relative;
+            min-height: 100vh;
+        }
+        #content-wrap {
+            padding-bottom: 2.5rem;
+        }
+        #div-footer-text {
+            padding-bottom: 0;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="{% url 'routeapp:index' %}">
-                <img src="https://img.icons8.com/emoji/344/rock-emoji.png" width="30" height="30" alt="" loading="lazy">
-            </a>
-            <a class="navbar-brand" href="{% url 'routeapp:index' %}">RouteFlash</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'routeapp:about' %}">About<span
-                                class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'routeapp:gyms' %}">Gyms</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'routeapp:register' %}">Register</a>
+    <div class="container" id="page-container">
+        <div class="container" id="content-wrap">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="{% url 'routeapp:index' %}">
+                    <img src="https://img.icons8.com/emoji/344/rock-emoji.png" width="30" height="30" alt="" loading="lazy">
+                </a>
+                <a class="navbar-brand" href="{% url 'routeapp:index' %}">RouteFlash</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'routeapp:about' %}">About<span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'routeapp:gyms' %}">Gyms</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'routeapp:register' %}">Register</a>
 
-                        {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'routeapp:logout' %}">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'routeapp:login' %}">Login</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
-
-        <span>
-            <h3 class="title">Routes for {{ gym.name }}</h3>
-        </span>
-
-        <div id="app">
-            <div id="panzoom_container">
-                <div id="panzoom">
-                    <button data-toggle="modal" data-target="#route-modal" @click="selected_route = route" v-for="route in routes"
-                        :style="{left: route.x_position + 'px', top: route.y_position + 'px', backgroundColor: route.rating_color}">v[[route.rating]]</button>
-
+                            {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'routeapp:logout' %}">Logout</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'routeapp:login' %}">Login</a>
+                        </li>
+                        {% endif %}
+                    </ul>
                 </div>
-            </div>
-            <div class="modal fade" id="route-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">[[selected_route.name]]</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p><b>Name</b>: [[selected_route.name]]</p>
-                            <p><b>Wall Type</b>: [[selected_route.wall_type]]</p>
-                            <p><b>Rating</b>: v[[selected_route.rating]]</p>
-                            <p><b>Height</b>: [[selected_route.height]] ft</p>
-                            <p><b>Description</b>: [[selected_route.description]]</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </nav>
+
+            <span>
+                <h3 class="title">Routes for {{ gym.name }}</h3>
+            </span>
+
+            <div id="app">
+                <div id="panzoom_container">
+                    <div id="panzoom">
+                        <button data-toggle="modal" data-target="#route-modal" @click="selected_route = route" v-for="route in routes"
+                            :style="{left: route.x_position + 'px', top: route.y_position + 'px', backgroundColor: route.rating_color}">v[[route.rating]]</button>
+
+                    </div>
+                </div>
+                <div class="modal fade" id="route-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">[[selected_route.name]]</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p><b>Name</b>: [[selected_route.name]]</p>
+                                <p><b>Wall Type</b>: [[selected_route.wall_type]]</p>
+                                <p><b>Rating</b>: v[[selected_route.rating]]</p>
+                                <p><b>Height</b>: [[selected_route.height]] ft</p>
+                                <p><b>Description</b>: [[selected_route.description]]</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <footer class="page-footer font-small my-footer">
+            <div class="footer-copyright text-center" id="div-footer-text">Route Flash</div>
+        </footer>
     </div>
 
     <script>
