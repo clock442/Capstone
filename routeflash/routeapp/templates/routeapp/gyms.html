@@ -1,8 +1,14 @@
 {% extends 'routeapp/base.html' %}
 
 {% block content %}
+<style>
+    .card {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
 <div id="app" class="container">
-    <h3>Supported Gyms</h3>
+    <h3 class="title">Supported Gyms</h3>
 
     <div v-for="gym in gyms">
         <div class="card">

@@ -12,4 +12,5 @@ urlpatterns = [
     path('getgyms/', views.getgyms, name='getgyms'),
     path('routes/<str:gym_id>/', views.routes, name='routes'),
     path('getroutes/<int:gym_id>/', views.getroutes, name='getroutes'),
+    path('about', views.about, name='about'),
 ]

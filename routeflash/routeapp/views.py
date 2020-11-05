@@ -12,6 +12,9 @@ from datetime import datetime
 def index(request):
     return render(request, 'routeapp/index.html')
 
+def about(request):
+    return render(request, 'routeapp/about.html')
+
 def register(request):
     if request.method == 'POST':
         recaptcha_data = {
